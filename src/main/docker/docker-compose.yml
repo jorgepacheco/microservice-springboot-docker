@@ -1,0 +1,15 @@
+microservice1:
+  image: 'jpacheco/micro-service-spring-boot:latest'
+  expose:
+    - "8080"
+microservice2:
+  image: 'jpacheco/micro-service-spring-boot:latest'
+  expose:
+    - "8080"
+loadbalancer:
+  image: 'dockercloud/haproxy:latest'
+  links:
+    - microservice1
+    - microservice2
+  ports:
+    - '80:80'

@@ -1,0 +1,14 @@
+version: '2'
+services:
+   microservice:
+    image: 'jpacheco/micro-service-spring-boot:latest'
+    expose:
+      - '8080'
+   loadbalancer:
+    image: 'dockercloud/haproxy:latest'
+    links:
+      - microservice
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - '80:80'
